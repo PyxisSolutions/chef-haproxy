@@ -1,0 +1,19 @@
+frontend <%= @name %>
+  bind <%= @bind_address %>:<%= @bind_port %>
+  mode  <%= @mode %>
+<% if @mode == "tcp" %>
+  option tcplog
+<% else %> 
+  option httplog
+<% end %>
+<% @options.each do |opt| %>
+  option <%= opt %>
+<% end %>
+  log <%= @log %>
+  timeout client <%= @timeout_client %>
+  maxconn <%= @maxconn %>
+<%= @raw_config %>
+<% if @default_backend %>
+  default_backend <%= @default_backend %>
+<% end %>
+

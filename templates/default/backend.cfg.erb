@@ -1,0 +1,23 @@
+backend <%= @name %>
+  mode  <%= @mode %>
+<% if @mode == "tcp" %>
+  option tcplog
+<% else %> 
+  option httplog
+<% end %>
+<% @options.each do |opt| %>
+  option <%= opt %>
+<% end %>
+  log <%= @log %>
+  timeout connect <%= @timeout_queue %>
+  timeout queue <%= @timeout_queue %>
+  timeout server <%= @timeout_server %>
+  maxconn <%= @maxconn %>
+<%= @raw_config %>
+<% @servers.each do |srv| %>
+  <%= srv %>
+<% end %>
+<% if @default_server %>
+  default_server <%= @default_server %>
+<% end %>
+

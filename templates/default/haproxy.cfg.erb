@@ -1,0 +1,73 @@
+#
+# THIS FILE IS MANAGED BY CHEF.
+# EDIT AT YOUR OWN RISK
+# YOUR CHANGES **WILL** BE LOST!
+#
+# to edit, see cookbook haproxy/templates/default/haproxy.cfg.erb
+#
+
+#---------------------------------------------------------------------
+# Global settings
+#---------------------------------------------------------------------
+global
+# FIXME  logs facility + destination
+    log         <<%= node['haproxy']['log_address']  %> <%= node['haproxy']['log_facility'] %>
+
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    user        <%= node['haproxy']['user']  %>
+    group       <%= node['haproxy']['user']  %>
+    daemon
+    maxconn    <%= node['haproxy']['global']['max_connections']  %>             
+
+    # turn on stats unix socket
+    stats socket /var/lib/haproxy/stats
+
+#---------------------------------------------------------------------
+# common defaults
+#---------------------------------------------------------------------
+defaults
+  log                     global
+  # options
+<% node['haproxy']['defaults']['options'].each do |opt| %>
+  option                  <%= opt %>
+<% end %>
+  retries                 3
+  #timeouts
+<% node['haproxy']['defaults']['timeouts'].each do |what,howlong| %>
+  timeout <%= what %> <%= howlong %>
+<% end %>
+
+#/default
+
+<% if node['haproxy']['admin']['enable'] %>
+################################################################################
+# Data, give me data
+listen stats <%= node['haproxy']['admin']['address_bind'] %>:<%= node['haproxy']['admin']['port'] %>
+   mode http
+   stats enable
+   stats hide-version
+   stats realm Haproxy\ Statistics
+   stats uri /
+   stats auth <%= node['haproxy']['admin']['user'] %>:<%= node['haproxy']['admin']['password'] %>
+
+<% end %>
+
+
+################################################################################
+# The following was auto-include a template generation from <%= node['haproxy']['tmp_config_dir']%>
+###
+
+<%=
+  # Read all the pieces of config file and include them
+out = []
+Dir.glob "#{node['haproxy']['tmp_config_dir']}/*" do |cfg|
+  out << "# #{cfg}\n"
+  out << IO.read(cfg)
+end
+out.join "\n"
+%>
+
+#/autoinclude
+
+

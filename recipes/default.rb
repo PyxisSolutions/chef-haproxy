@@ -18,11 +18,14 @@
 #
 
 # FIXME
-log("FIXME PACKAGE NAME"){ :level warn }
-pgkname = node['haproxy']['enable_ssl'] ? 'haproxy-ssl' : 'haproxy'
+log("FIXME PACKAGE NAME"){ level :warn }
+pkgname = node['haproxy']['enable_ssl'] ? 'haproxy-ssl' : 'haproxy'
+# FIXME
+pkgname = 'haproxy'
 
 package pkgname do
   version node['haproxy']['version']
+  source "/vagrant/haproxy-1.5.17-1.x86_64.rpm"
   action :install
 end
 
@@ -48,11 +51,11 @@ template node['haproxy']['config'] do
   owner "root"
   group "root"
   mode 00644
-  notifies :reload, "service[haproxy]"
+# FIXME  notifies :reload, "service[haproxy]"
 end
-
-service "haproxy" do
-  supports :restart => true, :status => true, :reload => true
-  action [:enable, :start]
-end
+# FIXME
+#service "haproxy" do
+#  supports :restart => true, :status => true, :reload => true
+#  action [:enable, :start]
+#end
 
