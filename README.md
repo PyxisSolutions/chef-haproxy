@@ -1,7 +1,9 @@
 Description
 ===========
 
-HAProxy installation and configuration, using LWRP for frontend and backend
+HAProxy installation and configuration, using LWRP for frontend and backend.
+
+Please note that this cookbook is not tested much yet. Use with caution ;)
 
 
 Requirements
@@ -17,10 +19,8 @@ Attributes
 
 * default['haproxy']['version']    - Version to install. Default to 1.5.17 aka 1.5-dev17 - latest ssl enabled version
 * default['haproxy']['enable_ssl'] - Set to true if you want to force the installation of a package named haproxy-ssl
-
 * default['haproxy']['user'] = "haproxy"
 * default['haproxy']['group'] = "haproxy"
-
 * default['haproxy']['log_address']  - Syslog server address. Default "127.0.0.1"
 * default['haproxy']['log_facility'] - Syslog facility to use. default "local2"
 
@@ -30,6 +30,7 @@ Attributes
 * default['haproxy']['config']   - main config file. Set automatically to haconfig.cfg
 
 # admin
+
 * default['haproxy']['admin']['enable'] - Should we enable the stats web interface?
 * default['haproxy']['admin']['address_bind'] - Where to bind the stats interface 
 * default['haproxy']['admin']['port'] - stats interface, port 1936
@@ -48,7 +49,6 @@ Attributes
 
 # global
 * default['haproxy']['defaults']['max_connections'] = 4096
-
 
 
 Usage
