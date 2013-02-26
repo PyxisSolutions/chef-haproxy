@@ -15,38 +15,39 @@ Attributes
 ==========
 
 
-default['haproxy']['version']    - Version to install. Default to 1.5.17 aka 1.5-dev17 - latest ssl enabled version
-default['haproxy']['enable_ssl'] - Set to true if you want to force the installation of a package named haproxy-ssl
+* default['haproxy']['version']    - Version to install. Default to 1.5.17 aka 1.5-dev17 - latest ssl enabled version
+* default['haproxy']['enable_ssl'] - Set to true if you want to force the installation of a package named haproxy-ssl
 
-default['haproxy']['user'] = "haproxy"
-default['haproxy']['group'] = "haproxy"
+* default['haproxy']['user'] = "haproxy"
+* default['haproxy']['group'] = "haproxy"
 
-default['haproxy']['log_address']  - Syslog server address. Default "127.0.0.1"
-default['haproxy']['log_facility'] - Syslog facility to use. default "local2"
+* default['haproxy']['log_address']  - Syslog server address. Default "127.0.0.1"
+* default['haproxy']['log_facility'] - Syslog facility to use. default "local2"
 
 # config
-default['haproxy']['conf_dir'] - Config directory. Default to "/etc/haproxy"
-default['haproxy']['config']   - main config file. Set automatically to haconfig.cfg
+
+* default['haproxy']['conf_dir'] - Config directory. Default to "/etc/haproxy"
+* default['haproxy']['config']   - main config file. Set automatically to haconfig.cfg
 
 # admin
-default['haproxy']['admin']['enable'] - Should we enable the stats web interface?
-default['haproxy']['admin']['address_bind'] - Where to bind the stats interface 
-default['haproxy']['admin']['port'] - stats interface, port 1936
-default['haproxy']['admin']['user'] - stats interface, user
-default['haproxy']['admin']['password'] - stats interface password
+* default['haproxy']['admin']['enable'] - Should we enable the stats web interface?
+* default['haproxy']['admin']['address_bind'] - Where to bind the stats interface 
+* default['haproxy']['admin']['port'] - stats interface, port 1936
+* default['haproxy']['admin']['user'] - stats interface, user
+* default['haproxy']['admin']['password'] - stats interface password
 
 # Some default values
 
-default['haproxy']['defaults']['options'] = [ "dontlognull", "redispatch"]
-default['haproxy']['defaults']['timeouts']['connect'] = "5s"
-default['haproxy']['defaults']['timeouts']['client'] = "50s"
-default['haproxy']['defaults']['timeouts']['server'] = "50s"
-default['haproxy']['defaults']['timeouts']['check'] = "10s"
-default['haproxy']['defaults']['timeouts']['http-request'] = "10s"
-default['haproxy']['defaults']['timeouts']['http-keep-alive'] = "10s"
+* default['haproxy']['defaults']['options'] = [ "dontlognull", "redispatch"]
+* default['haproxy']['defaults']['timeouts']['connect'] = "5s"
+* default['haproxy']['defaults']['timeouts']['client'] = "50s"
+* default['haproxy']['defaults']['timeouts']['server'] = "50s"
+* default['haproxy']['defaults']['timeouts']['check'] = "10s"
+* default['haproxy']['defaults']['timeouts']['http-request'] = "10s"
+* default['haproxy']['defaults']['timeouts']['http-keep-alive'] = "10s"
 
 # global
-default['haproxy']['defaults']['max_connections'] = 4096
+* default['haproxy']['defaults']['max_connections'] = 4096
 
 
 
